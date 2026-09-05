@@ -1,0 +1,6 @@
+{
+  "name": "Adaptive Learning Platform",
+  "description": "Personalized learning paths, adaptive assessments, and tailored study resources based on student performance and preferences.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,71 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Student profile, preferences, learning style, and academic goals",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 120 },
+        "photoURL": { "type": "string", "maxLength": 512 },
+        "learningStyle": { "type": "string", "maxLength": 64 },
+        "pacing": { "type": "string", "maxLength": 64 },
+        "primaryInterest": { "type": "string", "maxLength": 128 },
+        "interestEmoji": { "type": "string", "maxLength": 16 },
+        "overallMasteryScore": { "type": "number" },
+        "completedModulesCount": { "type": "number" },
+        "currentStreakDays": { "type": "number" },
+        "academicGoal": { "type": "object" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "displayName"]
+    },
+    "AssessmentResultRecord": {
+      "title": "AssessmentResultRecord",
+      "description": "Recorded adaptive assessment session and performance metrics",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "moduleTitle": { "type": "string", "maxLength": 200 },
+        "finalScore": { "type": "number" },
+        "masteryLevel": { "type": "string", "maxLength": 64 },
+        "cognitiveGaps": { "type": "array" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "userId", "finalScore", "masteryLevel"]
+    },
+    "SavedResource": {
+      "title": "SavedResource",
+      "description": "Saved and bookmarked study resources curated for student",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "resourceId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "source": { "type": "string", "maxLength": 128 },
+        "format": { "type": "string", "maxLength": 64 },
+        "url": { "type": "string", "maxLength": 512 },
+        "savedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile with personalized learning settings"
+    },
+    "/users/{userId}/assessments/{assessmentId}": {
+      "schema": { "$ref": "#/entities/AssessmentResultRecord" },
+      "description": "Adaptive assessment results and diagnostic gaps per user"
+    },
+    "/users/{userId}/savedResources/{resourceId}": {
+      "schema": { "$ref": "#/entities/SavedResource" },
+      "description": "Curated study materials bookmarked by the user"
+    }
+  }
+}
